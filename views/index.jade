@@ -1,0 +1,147 @@
+extends layout
+block content
+  head
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
+    script(src="http://code.jquery.com/ui/1.10.3/jquery-ui.js")
+    link(rel="stylesheet", href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
+    link(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
+    link(el="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css")
+    script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+    meta(name='description', content='SJDC Support')
+    //- script.
+    //-   $.ajax({
+    //-             type: 'post',
+    //-             processData: false,
+    //-             contentType: false,
+    //-             url: "http://134.117.4.8",
+    //-             success: function(data,textStatus,XHR) {
+    //-                console.log('THE DATA: '+data); 
+    //-             } 
+    //-           })     
+  body()
+    nav.navbar.navbar-default.navbar-inverse.navbar-fixed-top(role="navigation")
+
+      // Brand and toggle get grouped for better mobile display
+      .navbar-header
+        button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse")
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+          if (orgId)
+            a.navbar-brand(href="create") CREATE A TICKET
+          else
+            a.navbar-brand(href="#" id="login" data-title="SJDC Registration" data-trigger="click" rel="popover" data-placement="bottom" data-content="You must first select your Organization. Please select Location below" data-original-tile="ticket") SJDC REGISTRATION
+        
+
+      // Collect the nav links for toggling
+      .collapse.navbar-collapse.navbar-ex1-collapse
+        ul.nav.navbar-nav.navbar-center
+          li.dropdown
+            a(href="#" class="dropdown-toggle" data-toggle="dropdown") Activities
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href="channel") Teams
+          li.dropdown
+            a(href="#" class="dropdown-toggle" data-toggle="dropdown") Curriculum
+              b.caret
+            ul.dropdown-menu
+              li.active
+                a(href="select") Math
+          li.dropdown
+            a(href="#" lass="dropdown-toggle" data-toggle="dropdown") Culture
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href="statistics") Arts
+              li
+                a(href="index") Log Out
+        img#benbria.nav.navbar-nav.navbar-right(src="images/benbria2.png", hieght="40", width="40", alt="SJDC")
+    .jumbotron
+        h1.titre Welcome to San Joaquin Delta College!
+        
+    .container
+      form.form.form-horizontal(role="form" action="ping" method="get" enctype="multipart/form-data")
+        .form-group
+          fieldset
+            legend Student Services Application Form
+            label 
+            select(id="title",name="id")
+              option(value="Mr") Mr.
+              option(value="Ms") Ms.
+              option(value="Mrs") Mrs.
+            label.control-label
+              .col-sm-offset-1
+                input.form-control(type="text" placeholder="First Name" name ="fname") 
+            label
+              .col-sm-offset-1
+                input.form-control(type="text" placeholder="Last Name" name ="lname")
+        .form-group
+          .checkbox
+            label
+              input(type="checkbox" name="checkbox") 
+              span=" Subscribe to ENS Service"
+        .form-group
+          label(for="inputEmail") Email Address:
+            input.form-control(type="email" placeholder="Email Address" name ="email")
+        .form-group
+          a(href="#registerModal" data-toggle="modal") Register you Cell Number
+        if (code)
+          .form-group
+            label(style="color:green") You Cell has been registered!
+        if (stuff)
+          .form-group
+            if (stuff == 200)
+              label(style="color:green") You Cell has been registered! #{stuff}
+            else
+              label(style="color:red") You Cell was not registered!! #{stuff}
+        .form-group
+          button.btn.btn-primary Submit
+      .col-md-1
+
+    #contact 
+      a.button(data-toggle="modal" href="#myModal") Contact Us
+
+    div(id="registerModal" class="modal fade in")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            .button.close(data-dismiss="modal" aria-hidden="true") X
+            .modal-title 
+              center 
+                strong REGISTRATION FORM
+          .modal-body
+              form.form.form-horizontal(class="form-horizontal" action="/registerUser",method="post",enctype="multipart/form-data")
+                .form-group
+                  label.col-sm-4.control-label(for="inputPhone") Phone Number:
+                  .col-sm-6
+                    input.form-control(type="text" placeholder="Phone Number" name ="phone")
+                .form-group
+                  .col-sm-offset-4.col-sm-6.controls
+                    button.btn.btn-primary(type="submit") Submit Phone Number
+          .modal-footer
+              button.btn.btn-primary(data-dismiss="modal" aria-hidden="true") Close
+
+
+    div(id="myModal" class="modal fade in")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            .button.close(data-dismiss="modal" aria-hidden="true") X
+            .modal-title CONTACT US
+          .modal-body
+              a#tel(href='callto:613-271-5995') 613-271-5995
+              br
+              a#email(href='mailto:support@ooyala.com?Subject=Ooyala Support') support@twu.ca
+          .modal-footer
+              button.btn.btn-primary(data-dismiss="modal" aria-hidden="true") Close
+
+  
+     
+        
+    
+    
+      
+    
+      
